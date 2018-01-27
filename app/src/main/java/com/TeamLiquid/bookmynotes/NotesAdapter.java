@@ -19,7 +19,7 @@ public class NotesAdapter extends BaseAdapter {
     ArrayList<NotesObject> notenote;
     LayoutInflater inflater;
 
-    public NotesAdapter(Context context, ArrayList<NotesObject> notenote, LayoutInflater inflater) {
+    NotesAdapter(Context context, ArrayList<NotesObject> notenote, LayoutInflater inflater) {
         this.context = context;
         this.notenote = notenote;
         this.inflater = inflater;
@@ -31,7 +31,7 @@ public class NotesAdapter extends BaseAdapter {
     }
 
     @Override
-    public Object getItem(int i) {
+    public NotesObject getItem(int i) {
         return notenote.get(i);
     }
 

@@ -1,13 +1,10 @@
 package com.TeamLiquid.bookmynotes;
 
-import android.content.ContentResolver;
-import android.content.ContentValues;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Activity;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
@@ -16,21 +13,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SearchView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class notesGridView extends Activity {
 
@@ -40,20 +33,20 @@ public class notesGridView extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_view);
 
-        SearchView searchNotes;
-        final ImageView showimg;
+        //SearchView searchNotes;
+        //final ImageView showimg;
         final EditText notes;
         Button addImg;
         final ArrayList<NotesObject> content = new ArrayList<>();
-        final int[] j = {0}; //To store the position of the arraylist of notesObject I am in right now.
+        //final int[] j = {0}; //To store the position of the arraylist of notesObject I am in right now.
 
-        searchNotes = findViewById(R.id.searchNotes);
+        //searchNotes = findViewById(R.id.searchNotes);
         notes = findViewById(R.id.write);
         addImg = findViewById(R.id.addImg);
 
-        final NotesAdapter adaptbitch = new NotesAdapter(getApplicationContext(), content, getLayoutInflater());
+        final NotesAdapter adapter = new NotesAdapter(getApplicationContext(), content, getLayoutInflater());
         final ListView notelist = findViewById(R.id.notesList);
-        notelist.setAdapter(adaptbitch);
+        notelist.setAdapter(adapter);
 
         //Add button onclick method to capture images.
         addImg.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +82,7 @@ public class notesGridView extends Activity {
                         //Saving URI of the to be generated image in the content file.
                         note1.setImguri(photoURI);
                         content.add(note1);
+                        saveTheStuff(content);
 
                         //Actually taking the picture by action activity.
                         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
@@ -101,6 +95,7 @@ public class notesGridView extends Activity {
                 //Creating the view again.
                 NotesAdapter adaptbitch = new NotesAdapter(getApplicationContext(), content, getLayoutInflater());
                 ListView notelist = findViewById(R.id.notesList);
+                notelist.setAdapter(adaptbitch);
 
             }
         });
