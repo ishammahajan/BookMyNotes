@@ -93,9 +93,9 @@ public class notesGridView extends Activity {
                 }
 
                 //Creating the view again.
-                NotesAdapter adaptbitch = new NotesAdapter(getApplicationContext(), content, getLayoutInflater());
+                NotesAdapter adapter1 = new NotesAdapter(getApplicationContext(), content, getLayoutInflater());
                 ListView notelist = findViewById(R.id.notesList);
-                notelist.setAdapter(adaptbitch);
+                notelist.setAdapter(adapter1);
 
             }
         });
